@@ -7,6 +7,7 @@ import CustomModal from "src/components/commons/CustomModal";
 import { ModalContent, SlotContainer } from "./styles";
 import ExplainationDropdown from "../common/ExplainationDropdown";
 import DataCard from "../common/DataCard";
+import MarloweDatumInfo from "../Marlowe/DatumInfo";
 
 type Data = { title: string; value?: string | number };
 
@@ -14,9 +15,11 @@ export interface DatumModalProps {
   open?: boolean;
   onClose?: () => void;
   data?: Data[];
+  datumBytes?: string;
+  scriptHash?: string;
 }
 
-const DatumModal: React.FC<DatumModalProps> = ({ open = false, onClose, data }) => {
+const DatumModal: React.FC<DatumModalProps> = ({ open = false, onClose, data, scriptHash, datumBytes }) => {
   const { t } = useTranslation();
   const handleCloseModal = () => onClose?.();
   return (
@@ -46,6 +49,10 @@ const DatumModal: React.FC<DatumModalProps> = ({ open = false, onClose, data }) 
               ))}
           </Grid>
         </SlotContainer>
+
+        {scriptHash !== undefined && datumBytes !== undefined && (
+          <MarloweDatumInfo bytes={datumBytes} scriptHash={scriptHash} />
+        )}
       </ModalContent>
     </CustomModal>
   );

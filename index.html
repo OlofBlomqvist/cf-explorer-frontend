@@ -52,6 +52,14 @@
         window.decodeUPLC = decode;
       });
     </script>
+
+    <script type="module">
+      import init, * as marlowe from '/lib/marlowe_pkg/marlowe_lang.js';
+      init("/lib/marlowe_pkg/marlowe_lang_bg.wasm").then(x => {
+        window.marlowe_rs = marlowe
+      });
+    </script> 
+
     <script>
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       document.addEventListener("gesturestart", function (e) {

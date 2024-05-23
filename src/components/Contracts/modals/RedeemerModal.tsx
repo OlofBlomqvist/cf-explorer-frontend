@@ -7,6 +7,7 @@ import CustomModal from "src/components/commons/CustomModal";
 import { ModalContent, SlotContainer } from "./styles";
 import ExplainationDropdown from "../common/ExplainationDropdown";
 import DataCard from "../common/DataCard";
+import MarloweRedeemerInfo from "../Marlowe/RedeemerInfo";
 
 type Data = { title: string; value?: string | number };
 
@@ -14,11 +15,13 @@ export interface RedeemerModalProps {
   open?: boolean;
   onClose?: () => void;
   data?: Data[];
+  redeemerBytes?: string;
+  scriptHash?: string;
 }
-
-const RedeemerModal: React.FC<RedeemerModalProps> = ({ open = false, onClose, data }) => {
+const RedeemerModal: React.FC<RedeemerModalProps> = ({ open = false, data, onClose, redeemerBytes, scriptHash }) => {
   const { t } = useTranslation();
   const handleCloseModal = () => onClose?.();
+
   return (
     <CustomModal
       modalProps={{ style: { zIndex: 1302 } }}
@@ -46,6 +49,10 @@ const RedeemerModal: React.FC<RedeemerModalProps> = ({ open = false, onClose, da
               ))}
           </Grid>
         </SlotContainer>
+
+        {scriptHash !== undefined && redeemerBytes !== undefined && (
+          <MarloweRedeemerInfo bytes={redeemerBytes} scriptHash={scriptHash} />
+        )}
       </ModalContent>
     </CustomModal>
   );

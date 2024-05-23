@@ -80,6 +80,8 @@ const Spendviews: React.FC<SpendViewProps> = ({ data, isMobile }) => {
   return (
     <SpendContainer isMobile={+!!isMobile}>
       <RedeemerModal
+        scriptHash={data?.scriptHash}
+        redeemerBytes={data?.redeemerBytes}
         data={[
           { title: t("contract.purpose"), value: data?.purpose },
           { title: t("contract.data"), value: data?.redeemerBytes },
@@ -90,6 +92,8 @@ const Spendviews: React.FC<SpendViewProps> = ({ data, isMobile }) => {
         onClose={() => setOpenRedeemer(false)}
       />
       <DatumModal
+        scriptHash={data?.scriptHash}
+        datumBytes={data?.datumBytesOut ?? data?.datumBytesIn}
         data={[
           { title: t("contract.datumHash"), value: data?.datumHashOut || data?.datumHashIn },
           { title: t("contract.datum"), value: data?.datumBytesOut || data?.datumBytesIn }
